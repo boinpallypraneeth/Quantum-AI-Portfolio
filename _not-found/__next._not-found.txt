@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
-2:I[39756,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-3:I[37457,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-0:{"buildId":"Y6eF5I5DRzMeXhmq0O7B1","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+2:I[39756,["/Quantum-AI-Portfolio/_next/static/chunks/ff1a16fafef87110.js","/Quantum-AI-Portfolio/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+3:I[37457,["/Quantum-AI-Portfolio/_next/static/chunks/ff1a16fafef87110.js","/Quantum-AI-Portfolio/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+0:{"buildId":"2qBJjuk6TQXhq9nB8G0f3","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}

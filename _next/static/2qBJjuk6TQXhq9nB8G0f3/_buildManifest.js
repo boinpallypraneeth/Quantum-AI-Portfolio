@@ -1,7 +1,12 @@
 self.__BUILD_MANIFEST = {
   "__rewrites": {
     "afterFiles": [],
-    "beforeFiles": [],
+    "beforeFiles": [
+      {
+        "source": "/Quantum-AI-Portfolio//_next/:path+",
+        "destination": "/Quantum-AI-Portfolio/_next/:path+"
+      }
+    ],
     "fallback": []
   },
   "sortedPages": [
