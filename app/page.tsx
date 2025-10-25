@@ -4,17 +4,16 @@ import Spline from "@splinetool/react-spline/next";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-interface Project {
+type Project = {
   id: string;
   title: string;
   short: string;
   bullets: string[];
-}
+};
 
 export default function QuantumAIPortfolio() {
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState<string>("home");
   const [openProject, setOpenProject] = useState<Project | null>(null);
-  const nav = ["home", "about", "projects", "demos", "glossary", "contact"];
 
   const projects: Project[] = [
     {
@@ -45,15 +44,19 @@ export default function QuantumAIPortfolio() {
     },
   ];
 
+  const handleProjectClick = (p: Project) => {
+    setOpenProject({ ...p }); // ✅ explicit object copy ensures correct type
+  };
+
   return (
     <div className="min-h-screen font-sans bg-black text-white relative overflow-hidden">
-      {/* 3D Spline background */}
+      {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
         <Spline scene="https://prod.spline.design/7UdLD3GH5sstxBrG/scene.splinecode" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
       </div>
 
-      {/* Content */}
+      {/* Main content */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 py-8">
         <header className="flex flex-col items-center justify-center text-center py-24">
           <motion.h1
@@ -91,128 +94,40 @@ export default function QuantumAIPortfolio() {
           </div>
         </header>
 
-        {/* Main grid */}
         <main className="mt-10 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left column */}
+          {/* Projects list */}
           <section className="lg:col-span-2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight">
-                We make quantum physics simple — and wild.
-              </h2>
-              <p className="mt-4 text-lg text-white/80">
-                Interactive demos, plain-English explainers, and production-ready
-                tooling to let curious people (and researchers) explore quantum
-                computing and AI. No PhD required.
-              </p>
-
-              <div className="mt-6 flex gap-3 flex-wrap">
-                <button
-                  onClick={() => setActive("projects")}
-                  className="px-5 py-3 rounded-2xl bg-white/10 hover:bg-white/14"
+            <h3 className="text-xl font-semibold mb-4">Highlighted Projects</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {projects.map((p) => (
+                <motion.article
+                  key={p.id}
+                  whileHover={{ y: -6 }}
+                  className="p-4 bg-white/5 rounded-lg cursor-pointer"
+                  onClick={() => handleProjectClick(p)} // ✅ fixed type-safe call
                 >
-                  Explore Projects
-                </button>
-                <button
-                  onClick={() => setActive("demos")}
-                  className="px-5 py-3 rounded-2xl border border-white/10"
-                >
-                  Try a Demo
-                </button>
-                <a
-                  href="#glossary"
-                  onClick={() => setActive("glossary")}
-                  className="px-5 py-3 rounded-2xl bg-white/6"
-                >
-                  Quick Glossary
-                </a>
-              </div>
-
-              {/* Quick explainers */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                {[
-                  {
-                    title: "For Beginners",
-                    desc: "Simple analogies and visuals explaining qubits and entanglement.",
-                  },
-                  {
-                    title: "For Engineers",
-                    desc: "Code snippets and API docs to reproduce experiments.",
-                  },
-                  {
-                    title: "For Researchers",
-                    desc: "Datasets and open-source toolkits for benchmarking.",
-                  },
-                ].map((card) => (
-                  <div key={card.title} className="p-4 bg-white/4 rounded-lg">
-                    <h3 className="font-semibold">{card.title}</h3>
-                    <p className="text-sm text-white/70 mt-2">{card.desc}</p>
+                  <h4 className="font-bold">{p.title}</h4>
+                  <p className="text-sm text-white/70 mt-2">{p.short}</p>
+                  <div className="mt-3 text-xs text-white/60">
+                    Click to expand • Live demo & code
                   </div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Projects list */}
-            <div className="mt-8">
-              <h3 className="text-xl font-semibold mb-4">
-                Highlighted Projects
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {projects.map((p) => (
-                  <motion.article
-                    key={p.id}
-                    whileHover={{ y: -6 }}
-                    className="p-4 bg-white/5 rounded-lg cursor-pointer"
-                    onClick={() => setOpenProject(p as Project)} // ✅ fixed
-                  >
-                    <h4 className="font-bold">{p.title}</h4>
-                    <p className="text-sm text-white/70 mt-2">{p.short}</p>
-                    <div className="mt-3 text-xs text-white/60">
-                      Click to expand • Live demo & code
-                    </div>
-                  </motion.article>
-                ))}
-              </div>
+                </motion.article>
+              ))}
             </div>
           </section>
 
-          {/* Right widgets */}
+          {/* Sidebar */}
           <aside className="space-y-4">
             <div className="p-4 bg-white/4 rounded-xl">
               <h4 className="font-semibold">Live Qubit Count</h4>
               <div className="mt-3 text-3xl font-bold">128 ✦</div>
               <p className="text-sm text-white/70 mt-2">
-                Simulated virtual qubit environment.
+                Simulated environment showing current virtual qubit availability.
               </p>
-            </div>
-
-            <div className="p-4 bg-white/4 rounded-xl">
-              <h4 className="font-semibold">Latest Insight</h4>
-              <p className="mt-2 text-sm text-white/70">
-                How noise shapes error rates — interactive visualization inside demos.
-              </p>
-            </div>
-
-            <div className="p-4 bg-white/4 rounded-xl">
-              <h4 className="font-semibold">Get Involved</h4>
-              <p className="mt-2 text-sm text-white/70">
-                Contribute code, design experiments, or sponsor compute resources.
-              </p>
-              <a
-                href="#contact"
-                onClick={() => setActive("contact")}
-                className="mt-3 inline-block px-3 py-2 rounded-md bg-white/6"
-              >
-                Contact
-              </a>
             </div>
           </aside>
         </main>
 
-        {/* Footer */}
         <footer className="mt-12 text-sm text-white/60">
           Developed by Praneeth Boinpally • © {new Date().getFullYear()} •
           Open-source experiments
@@ -251,19 +166,6 @@ export default function QuantumAIPortfolio() {
           </motion.div>
         </div>
       )}
-
-      {/* Accessibility */}
-      <div className="fixed right-4 bottom-4 z-50">
-        <button
-          title="Increase text"
-          onClick={() =>
-            (document.documentElement.style.fontSize = "18px")
-          }
-          className="px-3 py-2 rounded bg-white/6"
-        >
-          A+
-        </button>
-      </div>
     </div>
   );
 }
