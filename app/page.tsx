@@ -7,10 +7,16 @@ import { motion } from 'framer-motion';
 // QuantumAI_Crazy3D_Portfolio.jsx
 // Single-file React component (TailwindCSS + Framer Motion + Spline viewer)
 // Default export a React component for preview in Canvas.
+interface Project {
+  id: string;
+  title: string;
+  short: string;
+  bullets: string[];
+}
 
 export default function QuantumAIPortfolio() {
   const [active, setActive] = useState('home');
-  const [openProject, setOpenProject] = useState(null);
+  const [openProject, setOpenProject] = useState<Project | null>(null);
   const nav = ['home', 'about', 'projects', 'demos', 'glossary', 'contact'];
 
   const projects = [
