@@ -96,7 +96,7 @@ export default function QuantumAIPortfolio() {
               <h3 className="text-xl font-semibold mb-4">Highlighted Projects</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {projects.map(p => (
-                  <motion.article key={p.id} whileHover={{y:-6}} className="p-4 bg-white/5 rounded-lg cursor-pointer" onClick={() => setOpenProject(p)}>
+                  <motion.article key={p.id} whileHover={{y:-6}} className="p-4 bg-white/5 rounded-lg cursor-pointer" onClick={() => setOpenProject(p as any)}>
                     <h4 className="font-bold">{p.title}</h4>
                     <p className="text-sm text-white/70 mt-2">{p.short}</p>
                     <div className="mt-3 text-xs text-white/60">Click to expand • Live demo & code</div>
